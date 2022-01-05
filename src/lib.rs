@@ -6,14 +6,12 @@ extern crate test;
 
 mod engine;
 mod error;
-mod register;
 
 #[cfg(test)]
 use test::Bencher;
 
-use self::engine::{Engine, ExecutionContext, Func, Function, Instruction, ValueStack};
+use self::engine::{Engine, ExecutionContext, Func, Function, Instruction, Register, ValueStack};
 use self::error::Trap;
-use self::register::Register;
 
 /// Creates a function that takes a parameter `n` and
 /// counts from `n` down to 0 before it returns 0.
@@ -68,7 +66,9 @@ fn add_mul_works() {
 fn counter_loop_works() {
     let mut engine = Engine::default();
     let cl = engine.push_function(counter_loop());
-    engine.execute(cl, &[Register::from(10_000)], &mut []).unwrap();
+    engine
+        .execute(cl, &[Register::from(10_000)], &mut [])
+        .unwrap();
 }
 
 #[bench]

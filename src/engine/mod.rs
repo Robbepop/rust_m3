@@ -1,11 +1,12 @@
 mod function;
 mod value_stack;
 mod inst;
+mod register;
 
 pub use self::function::Function;
 pub use self::value_stack::ValueStack;
 pub use self::inst::Instruction;
-use crate::Register;
+pub use self::register::Register;
 use crate::Trap;
 
 #[derive(Debug, Default)]

@@ -1,4 +1,4 @@
-use crate::Register;
+use super::Register;
 
 #[derive(Debug)]
 pub struct ValueStack {
