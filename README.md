@@ -48,7 +48,7 @@ When a function `f` is called the following things are happening:
 - A special execution `Context` `ctx` with `pc = 0` is initialized.
 - The function parameters are stored on the value stack.
 - The top value stack element is popped (if any) and set to `reg`.
-- The instruction `Instruction { op, aux }` at index `0` is queried and executed with `(op)(&mut ctx, reg, aux)`.
+- The instruction `Instruction { f, aux }` at index `0` is queried and executed with `(f)(&mut ctx, reg, aux)`.
 - At the end of the instruction execution the instruction itself updates the `pc` and calls the next instruction.
     - This only works properly if the last execution is tail call optimized by Rust/LLVM.
 
