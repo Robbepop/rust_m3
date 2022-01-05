@@ -142,7 +142,7 @@ mod op {
     ) -> Result<(), Trap> {
         let lhs: i32 = ctx.value_stack.pop_as();
         let rhs: i32 = reg.into();
-        let result = lhs + rhs;
+        let result = lhs.wrapping_add(rhs);
         // println!("i32_add, pc: {}, {} + {} = {}", ctx.pc(), lhs, rhs, result);
         execute_next_instruction(ctx, result.into())
     }
@@ -154,7 +154,7 @@ mod op {
     ) -> Result<(), Trap> {
         let lhs: i32 = ctx.value_stack.pop_as();
         let rhs: i32 = reg.into();
-        let result = lhs - rhs;
+        let result = lhs.wrapping_sub(rhs);
         // println!("i32_add, pc: {}, {} - {} = {}", ctx.pc(), lhs, rhs, result);
         execute_next_instruction(ctx, result.into())
     }
@@ -166,17 +166,16 @@ mod op {
     ) -> Result<(), Trap> {
         let lhs: i32 = ctx.value_stack.pop_as();
         let rhs: i32 = reg.into();
-        let result = lhs * rhs;
+        let result = lhs.wrapping_mul(rhs);
         // println!("i32_mul, pc: {}, {} * {} = {}", ctx.pc(), lhs, rhs, result);
         execute_next_instruction(ctx, result.into())
     }
 
     pub fn i32_const(
         ctx: &mut ExecutionContext,
-        mut reg: Register,
+        reg: Register,
         aux: Register,
     ) -> Result<(), Trap> {
-        let reg = replace(&mut reg, aux);
         ctx.value_stack.push(reg);
         // println!("i32_const, pc: {}, const: {}", ctx.pc(), i32::from(aux));
         execute_next_instruction(ctx, aux)
