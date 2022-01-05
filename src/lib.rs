@@ -4,14 +4,14 @@
 #[cfg(test)]
 extern crate test;
 
-mod context;
+mod engine;
 mod error;
 mod register;
 
 #[cfg(test)]
 use test::Bencher;
 
-use self::context::{Engine, ExecutionContext, Func, Function, Instruction, ValueStack};
+use self::engine::{Engine, ExecutionContext, Func, Function, Instruction, ValueStack};
 use self::error::Trap;
 use self::register::Register;
 
