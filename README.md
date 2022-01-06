@@ -31,6 +31,7 @@ special purposes. For example:
 - For `br_if` it contains the target destination value.
 - For `br_table` it contains an index into the targets and default target.
     - The targets and default targets of `br_table` instructions reside in a special buffer.
+- Fore `i32_store` it contains the static `offset` within the pointed to memory region.
 
 Basically all instructions of the Wasm specification can be handled in one or another way
 similar to the instructions shown above.
