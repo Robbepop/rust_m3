@@ -69,9 +69,14 @@ pub struct ExecutionContext<'engine, 'func> {
 
 impl<'engine, 'func> ExecutionContext<'engine, 'func> {
     pub fn next_instruction(&mut self) -> Instruction {
-        let inst = self.insts[self.pc];
+        // Safety:
+        //
+        // If we perform proper validation of the input during bytecode generation
+        // we should be able to avoid this bounds check because we can check branch
+        // targets during compilation of the bytecode instead.
+        let inst = unsafe { self.insts.get_unchecked(self.pc) };
         self.pc += 1;
-        inst
+        *inst
     }
 
     pub fn update_pc(&mut self, new_pc: usize) {
